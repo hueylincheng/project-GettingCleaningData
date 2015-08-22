@@ -80,6 +80,7 @@ To create the tidy data set, we follow the procedures list below -
 
 Now, we can clean the data in each column by only subtract the strings we can use to represent the column name. There are 3 columns to be further processed -
 sensor - If the value contatins "acc" or "Acc" (case incensitive), "accelerometer" is the senor signal. If the value contains "gyro" or "Gyro" (case incensitive), "gyroscope" is the senor signal. Use the following code to transform the data. When try to find the sub string in a given string, use grep() and ignore the case (ignore.case=TRUE) - find sub string regardless the case.
+
 ...
     dt_tidyData$sensor[grepl("acc", dt_tidyData$sensor, ignore.case=TRUE)] <- "accelerometer"
     dt_tidyData$sensor[grepl("gyro", dt_tidyData$sensor, ignore.case=TRUE)] <- "gyroscope"
@@ -87,6 +88,7 @@ sensor - If the value contatins "acc" or "Acc" (case incensitive), "acceleromete
 ...
 
 One thing to note is: we can tell by str() that signal is current a factor variable, which does not allow us to convert to different value. We will convert the factor to character class first before we substitute the value. Use lapply and as.character to convert factor to character.
+
 ...
     dt_tidyData[4] <- lapply(dt_tidyData[4], as.character)
     dt_tidyData$signal <- sub("-mean\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
@@ -97,12 +99,14 @@ One thing to note is: we can tell by str() that signal is current a factor varia
 ...
 
 group the data by subject, activity, senor, signal, measurement so we can get average of the reading.
+
 ...
     by_variables_tidyData <- group_by(dt_tidyData, subject, activity, sensor, signal, measurement)
     summary_tidyData <- summarize(by_variables_tidyData, mean(reading))
 ...
 
 write the final data set to a text file using write.table() function to create a text file, tidy-getdata-031-project.txt.
+
 ...
 write.table(summary_tidyData, file="tidy-getdata-031-project.txt", row.names=FALSE)
 ...
@@ -155,6 +159,7 @@ The signal value is a composite value of the following elements -
 * X: X motion direction
 * Y: Y motion direction
 * Z: Z motion direction
+
 ##### **Data Type:** character
 ##### **Values:** 33 unique values -
 * fBodyAcc-X: body acceleration signal of frequency domain in X motion direction
