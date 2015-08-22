@@ -23,14 +23,14 @@ R> source(run_analysis.R)
 * Create a github repo to upload the codes and results to github for peer reviews
 * Create a R script under the working directory setup at step 0.2
 * Load required libraries(dplyr, data.table, reshape2, tidyr) used in this script
-
-     _library(dplyr)_
+...
+    _library(dplyr)_
     _library(data.table)_
-    _..._
-
+   
+...
 * Read raw data from the files to store in R data frames. 
 
-     _df_x_test <- read.table("./UCI HAR Dataset/test/X_test.txt", header=FALSE_
+     _df_x_test <- read.table("./UCI HAR Dataset/test/X_test.txt", header=FALSE)_
 
 There are a few data sets we need and the data included is explained as the following:
 * X_test, y_test have all the measurements of the signals
@@ -78,21 +78,21 @@ Finally, we run_analysis.R create a tidy data with the average of the reading pe
 
 * Melt the data set
 
-_dt_narrowData <- melt(dt_extractMeanStd, id.vars=c("subject", "activity"))_
+    _dt_narrowData <- melt(dt_extractMeanStd, id.vars=c("subject", "activity"))_
 
 * Split the 'variable' volumn to represent 2 other variables (senor type, and measurement)
 
-_dt_splitVar <- colsplit(dt_narrowData$variable, "-", c("sensor", "measurement"))
+    _dt_splitVar <- colsplit(dt_narrowData$variable, "-", c("sensor", "measurement"))
 dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
 
 * Create initial tidy data set by selecting the columns we need, rename  to more descriptive column names, and clean up the data value to reflect column name
 ...
     _dt_tidyData <- select(dt_tidyData,subject, activity, sensor, variable, measurement, value)
     colnames(dt_tidyData) <- c("subject", "activity", "sensor", "signal", "measurement", "reading")
-    ## clean up the data in each column so each value represents one variable
-    ## sensor: accelerometer and gryroscope
-    ## signal: tBodyAcc-X, -Y, -XYZ, tGravityAcc-XYZ, tBodyAccJerk-XYZ, tBodyGyro-XYZ
-    ## measure: mean, std
+    \#\# clean up the data in each column so each value represents one variable
+    \#\# sensor: accelerometer and gryroscope
+    \#\#signal: tBodyAcc-X, -Y, -XYZ, tGravityAcc-XYZ, tBodyAccJerk-XYZ, tBodyGyro-XYZ
+    \#\#measure: mean, std
 
     dt_tidyData$sensor[grepl("acc", dt_tidyData$sensor, ignore.case=TRUE)] <- "accelerometer"
     dt_tidyData$sensor[grepl("gyro", dt_tidyData$sensor, ignore.case=TRUE)] <- "gyroscope"
