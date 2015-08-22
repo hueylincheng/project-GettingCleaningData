@@ -86,7 +86,7 @@ _dt_splitVar <- colsplit(dt_narrowData$variable, "-", c("sensor", "measurement")
 dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
 
 * Create initial tidy data set by selecting the columns we need, rename  to more descriptive column names, and clean up the data value to reflect column name
-
+...
 	_dt_tidyData <- select(dt_tidyData,subject, activity, sensor, variable, measurement, value)
 	colnames(dt_tidyData) <- c("subject", "activity", "sensor", "signal", "measurement", "reading")
 	## clean up the data in each column so each value represents one variable
@@ -104,6 +104,7 @@ dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
 
 	dt_tidyData$measurement[grepl("mean", dt_tidyData$measurement, ignore.case=TRUE)] <- "mean"
 	dt_tidyData$measurement[grepl("std", dt_tidyData$measurement, ignore.case=TRUE)] <- "std"_
+...
 
 * Group the tidy data set by subject, activity, sensor, signal, and measurement
 
