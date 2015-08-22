@@ -88,6 +88,7 @@ dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
 * Create initial tidy data set by selecting the columns we need, rename to more descriptive column names, and clean up the data value to reflect column name
 
 ...
+    
     dt_tidyData <- select(dt_tidyData,subject, activity, sensor, variable, measurement, value)
     colnames(dt_tidyData) <- c("subject", "activity", "sensor", "signal", "measurement", "reading")
 
