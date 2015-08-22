@@ -14,7 +14,7 @@ To run the script to generate tidy data set, run the following command under R p
 
 R> source(run_analysis.R)
 
-# **Step 0. Read the instructions, README.md, prepare the working directory and Github repo, and read the data from the data files**
+## **Step 0. Read the instructions, README.md, prepare the working directory and Github repo, and read the data from the data files**
 
 * Read the course project instructions
 * Create local working directory to store downloaded data and codes
@@ -38,7 +38,7 @@ There are a few data sets we need and the data included is explained as the foll
 * features has the names of the measurements of the signals
 * activity_lables has the descriptive activity labels for each activity id
 
-# **Step 1. Merges the training and the test sets to create one data set**
+## **Step 1. Merges the training and the test sets to create one data set**
 
 1. Merge X, y, subject data under both test and train directories using rbind
 2. Assign descriptive name to each column in the data frames
@@ -49,31 +49,30 @@ Use dim(), str(), head(). tail(). unique() after each step to exam the data set 
 
 The result of the data frame looks like the following -
 
-     subject    activity   feature1  feature2 ... featureN
+    subject    activity   feature1  feature2 ... featureN
 
-# **Step 2. Extracts only the measurements on the mean and standard deviation for each measurement**
+## **Step 2. Extracts only the measurements on the mean and standard deviation for each measurement**
 
 1. Convert data frame, dt_allData to data table via tbl_df so we can use dplyr package to clean the data
 2. Use select() function to get only the columns containing mean() or std() of the signal/measurements
 
 _dt_extractMeanStd <- select(dt_allData, subject, actyDescription, grep("mean\\(\\)|std\\(\\)", colnames(dt_allData), fixed=FALSE))_
 
-# **Step 3. Uses descriptive activity names to name the activities in the data set**
+## **Step 3. Uses descriptive activity names to name the activities in the data set**
 
 Use setname() to rename descriptive activity column to 'activity'
 
 _setnames(dt_extractMeanStd, "actyDescription", "activity")_
 
-# **Step 4. Appropriately labels the data set with descriptive variable names**
+## **Step 4. Appropriately labels the data set with descriptive variable names**
 
 This step in the instruction is covered in step 1.2 above
 
-# **Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject**
+## **Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject**
 
 By examing the data, and assume that in the future, we would like to analyze and summarize the data to know who (subject), what activity,  what type of senor generates the data, what measurement of the signal presents, and its actual value, the tidy data set to be created requires to sepearate sensor type, signal type, and measurement (mean/std) from all the features. To achive this tidy data set, first, melt the data set to a narrow, skinny set. Next, add new columns to use one column to represent one variable.  The structure of this tidy data set will look as a database table in the 3rd normal form.
 
-subject    activity           sensor       signal             measurement       reading
-----------------------------------------------------------------------------------------
+    subject    activity           sensor       signal             measurement       reading
 
 Finally, we run_analysis.R create a tidy data with the average of the reading per subject, activity, sensor, signal, and measurement in the tidy data set, and write into a text file.
 
@@ -83,28 +82,28 @@ _dt_narrowData <- melt(dt_extractMeanStd, id.vars=c("subject", "activity"))_
 
 * Split the 'variable' volumn to represent 2 other variables (senor type, and measurement)
 
-dt_splitVar <- colsplit(dt_narrowData$variable, "-", c("sensor", "measurement"))
-dt_tidyData <- cbind(dt_narrowData, dt_splitVar)
+_dt_splitVar <- colsplit(dt_narrowData$variable, "-", c("sensor", "measurement"))
+dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
 
 * Create initial tidy data set by selecting the columns we need, rename  to more descriptive column names, and clean up the data value to reflect column name
 
-_dt_tidyData <- select(dt_tidyData,subject, activity, sensor, variable, measurement, value)
-colnames(dt_tidyData) <- c("subject", "activity", "sensor", "signal", "measurement", "reading")
-## clean up the data in each column so each value represents one variable
-## sensor: accelerometer and gryroscope
-## signal: tBodyAcc-X, -Y, -XYZ, tGravityAcc-XYZ, tBodyAccJerk-XYZ, tBodyGyro-XYZ
-## measure: mean, std
+	_dt_tidyData <- select(dt_tidyData,subject, activity, sensor, variable, measurement, value)
+	colnames(dt_tidyData) <- c("subject", "activity", "sensor", "signal", "measurement", "reading")
+	## clean up the data in each column so each value represents one variable
+	## sensor: accelerometer and gryroscope
+	## signal: tBodyAcc-X, -Y, -XYZ, tGravityAcc-XYZ, tBodyAccJerk-XYZ, tBodyGyro-XYZ
+	## measure: mean, std
 
-dt_tidyData$sensor[grepl("acc", dt_tidyData$sensor, ignore.case=TRUE)] <- "accelerometer"
-dt_tidyData$sensor[grepl("gyro", dt_tidyData$sensor, ignore.case=TRUE)] <- "gyroscope"
+	dt_tidyData$sensor[grepl("acc", dt_tidyData$sensor, ignore.case=TRUE)] <- "accelerometer"
+	dt_tidyData$sensor[grepl("gyro", dt_tidyData$sensor, ignore.case=TRUE)] <- "gyroscope"
 
-## convert signal factor as character so we can 
-dt_tidyData[4] <- lapply(dt_tidyData[4], as.character)
-dt_tidyData$signal <- sub("-mean\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
-dt_tidyData$signal <- sub("-std\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
+	## convert signal factor as character so we can 
+	dt_tidyData[4] <- lapply(dt_tidyData[4], as.character)
+	dt_tidyData$signal <- sub("-mean\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
+	dt_tidyData$signal <- sub("-std\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
 
-dt_tidyData$measurement[grepl("mean", dt_tidyData$measurement, ignore.case=TRUE)] <- "mean"
-dt_tidyData$measurement[grepl("std", dt_tidyData$measurement, ignore.case=TRUE)] <- "std"_
+	dt_tidyData$measurement[grepl("mean", dt_tidyData$measurement, ignore.case=TRUE)] <- "mean"
+	dt_tidyData$measurement[grepl("std", dt_tidyData$measurement, ignore.case=TRUE)] <- "std"_
 
 * Group the tidy data set by subject, activity, sensor, signal, and measurement
 
