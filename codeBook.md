@@ -1,6 +1,11 @@
 # Code Book of Getting and Cleaning Data Course Project
 ## Data Set Information:
-The data set are from the experiments which have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person (subject) performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) earing a Samsung Galaxy S II smartphone on the waist. Using its embedded accelerometer and gyroscope(sensor signal), we captured 3-axial linear aceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partioned into two sets (test and train), where 70% of the volunteers was selected for gather the training data and 30% the test data.
+The data set are from the experiments which have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. 
+
+Each person (subject) performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) earing a Samsung Galaxy S II smartphone on the waist. 
+
+Using its embedded accelerometer and gyroscope(sensor signal), we captured 3-axial linear aceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partioned into two sets (test and train), where 70% of the volunteers was selected for gather the training data and 30% the test data.
+
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
@@ -56,6 +61,7 @@ The goal of tidy data -
 * Each variable forms a column
 * Each observations forms a row
 * Each table/file stores data about one kind of observation
+
 To transform this data set to tidy data set, a few steps below are followed:
 1. merge the data in the test and train 2 data sets
 2. give each column a descriptive names
@@ -109,89 +115,92 @@ For each record in the dataset it is porvided:
 its activity label
 * An identifier of the subject who carried out the experiment.
 
-### **Column Name: Subject**
-### **Description:** Volunteer id. The individual who participanted in the experiments. They are a group of 30 volunteers within an age bracket of 19-48 years.
-### **Data Type:** integer
-### **Values:** 1, 2, 3, 4, 5, ..., 30
-### **N/A:** no
+#### **Column Name: Subject**
+##### **Description:** Volunteer id. The individual who participanted in the experiments. They are a group of 30 volunteers within an age bracket of 19-48 years.
+##### **Data Type:** integer
+##### **Values:** 1, 2, 3, 4, 5, ..., 30
+##### **N/A:** no
 
-### **Column Name: activity**
-### **Description:** 6 activities are performed by the 30 volunteers who wears Samsung Galaxy S II smartphone on the waist. WALKING represents the data collected when the volunteer is walking. WALKING_UPSTAIRS represents the data collected when the volunteer is walking upstairs. etc.
-Data Type: character
-Values: 6 factors. Their values are - WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING.
-N/A: no
-Data Type: integer
-Values: 1, 2, 3, 4, 5, ..., 30
-N/A: no
-Column Name: sensor
-Description: 2 sensor signals are measured for 3-axial linear aceleration and 3-axial angular velocity at a constant rate of 50Hz. 
-Data Type: character
-Values: accelerometer,  gyroscope
-N/A: no
-Column Name: signal
-Description: The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals. The acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+#### **Column Name: activity**
+##### **Description:** 6 activities are performed by the 30 volunteers who wears Samsung Galaxy S II smartphone on the waist. WALKING represents the data collected when the volunteer is walking. WALKING_UPSTAIRS represents the data collected when the volunteer is walking upstairs. etc.
+##### **Data Type:** character
+##### **Values:** 6 factors. Their values are - WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING.
+##### **N/A:** no
+##### **Data Type:** integer
+##### **Values:** 1, 2, 3, 4, 5, ..., 30
+##### **N/A:** no
+
+#### **Column Name: sensor**
+##### **Description:** 2 sensor signals are measured for 3-axial linear aceleration and 3-axial angular velocity at a constant rate of 50Hz. 
+##### **Data Type:** character
+##### **Values:** accelerometer,  gyroscope
+##### **N/A:** no
+
+#### **Column Name: signal**
+##### **Description:** The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals. The acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
 Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
 
 These signals were used to estimate variables of the feature vector for each pattern:  
 '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 The signal value is a composite value of the following elements -
-f: frequency domain signal
-t: time domain signal
-Body: body motion
-Gravity: gravity motion
-Acc: accelerometer
-Gyro: gyroscope
-Jerk: derieved in time from the body linear acceleration and angular velocity
-Mag: magnitude of the three-dimensional signal which is calculated using the Eclidean norm
-X: X motion direction
-Y: Y motion direction
-Z: Z motion direction
-Data Type: character
-Values: 33 unique values -
-fBodyAcc-X: body acceleration signal of frequency domain in X motion direction
-fBodyAcc-Y: body acceleratoin signal of frequency domain in Y motion direction
-fBodyAcc-Z: body acceleration signal of frequency domain in Z motion direction
-fBodyAccJerk-X: body acceleration jerk signal of frequency domain in X motion direction
-fBodyAccJerk-Y: body acceleration jerk signal of frequency domain in Y motion direction
-fBodyAccJerk-Z: body acceleration jerk signal of frequency domain in Z motion direction
-fBodyAccMag: magnitude of body acceleration signal of frequency domain
-fBodyBodyAccJerkMag: magnitude of body acceleration jerk signal of frequency domain
-tBodyAcc-X: body acceleration signal of time domain in X motion direction
-tBodyAcc-Y: body acceleration signal of time domain in Y motion direction
-tBodyAcc-Z: body acceleration signal of time domain in Z motion direction
-tBodyAccJerk-X: body accelertaion jerk signal of time domain in X motion direction
-tBodyAccJerk-Y: body accelertaion jerk signal of time domain in Y motion direction
-tBodyAccJerk-Z: body accelertaion jerk signal of time domain in Z motion direction
-tBodyAccJerkMag: magnitude of body acceleration jerk signal of time domain
-tBodyAccMag: magnitude of body acceleration of time domain
-tGravityAcc-X: gravity acceleration signal of time domain in X motion direction
-tGravityAcc-Y: gravity acceleration signal of time domain in Y motion direction
-tGravityAcc-Z: gravity acceleration signal of time domain in Z motion direction
-tGravityAccMag: magnitude of gravity acceleration of time domain
-fBodyBodyGyroJerkMag: magnitude of body motion of body gyroscope jerk signal of frequency domain in body motion
-fBodyBodyGyroMag: magnitutude of body motion of body gyroscope signal of frequency domain
-fBodyGyro-X: body gyroscope signal of frequency domain in X motion direction
-fBodyGyro-Y: body gyroscope signal of frequency domain in Y motion direction
-fBodyGyro-Z: body gyroscope signal of frequency domain in Z motion direction
-tBodyGyro-X: body gyroscope signal of time domain in X motion direction
-tBodyGyro-Y:  body gyroscope signal of time domain in Y motion direction
-tBodyGyro-Z:  body gyroscope signal of time domain in Z motion direction
-tBodyGyroJerk-X: body gyroscpoe jerk signal of time domain in X motion direction
-tBodyGyroJerk-Y: body gyroscpoe jerk signal of time domain in Y motion direction
-tBodyGyroJerk-Z: body gyroscpoe jerk signal of time domain in Z motion direction
-tBodyGyroJerkMag: magnitude of body gyroscope jerk signal of time domain
-tBodyGyroMag: magnitude of body grroscope signal of time domain
-N/A: no
-Column Name: measurement
-Description: The values of the signals are summarized in many different ways. In the data set we are interested, we are only interested in mean and standard deviation 2 values.
-Data Type: character
-Values: mean(average), std(standard deviation)
-N/A: no
-Column Name: mean(reading)
-Description: average of the readings from experiment per subject, activity, sensor, signal, measurement
-Data Type: numeric
-Values: the average value of the readings from experiement group by subject, activity, sensor, signal, and measurement.
+* f: frequency domain signal
+* t: time domain signal
+* Body: body motion
+* Gravity: gravity motion
+* Acc: accelerometer
+* Gyro: gyroscope
+* Jerk: derieved in time from the body linear acceleration and angular velocity
+* Mag: magnitude of the three-dimensional signal which is calculated using the Eclidean norm
+* X: X motion direction
+* Y: Y motion direction
+* Z: Z motion direction
+##### **Data Type:** character
+##### **Values:** 33 unique values -
+* fBodyAcc-X: body acceleration signal of frequency domain in X motion direction
+* fBodyAcc-Y: body acceleratoin signal of frequency domain in Y motion direction
+* fBodyAcc-Z: body acceleration signal of frequency domain in Z motion direction
+* fBodyAccJerk-X: body acceleration jerk signal of frequency domain in X motion direction
+* fBodyAccJerk-Y: body acceleration jerk signal of frequency domain in Y motion direction
+* fBodyAccJerk-Z: body acceleration jerk signal of frequency domain in Z motion direction
+* fBodyAccMag: magnitude of body acceleration signal of frequency domain
+* fBodyBodyAccJerkMag: magnitude of body acceleration jerk signal of frequency domain
+* tBodyAcc-X: body acceleration signal of time domain in X motion direction
+* tBodyAcc-Y: body acceleration signal of time domain in Y motion direction
+* tBodyAcc-Z: body acceleration signal of time domain in Z motion direction
+* tBodyAccJerk-X: body accelertaion jerk signal of time domain in X motion direction
+* tBodyAccJerk-Y: body accelertaion jerk signal of time domain in Y motion direction
+* tBodyAccJerk-Z: body accelertaion jerk signal of time domain in Z motion direction
+* tBodyAccJerkMag: magnitude of body acceleration jerk signal of time domain
+* tBodyAccMag: magnitude of body acceleration of time domain
+* tGravityAcc-X: gravity acceleration signal of time domain in X motion direction
+* tGravityAcc-Y: gravity acceleration signal of time domain in Y motion direction
+* tGravityAcc-Z: gravity acceleration signal of time domain in Z motion direction
+* tGravityAccMag: magnitude of gravity acceleration of time domain
+* fBodyBodyGyroJerkMag: magnitude of body motion of body gyroscope jerk signal of frequency domain in body motion
+* fBodyBodyGyroMag: magnitutude of body motion of body gyroscope signal of frequency domain
+* fBodyGyro-X: body gyroscope signal of frequency domain in X motion direction
+* fBodyGyro-Y: body gyroscope signal of frequency domain in Y motion direction
+* fBodyGyro-Z: body gyroscope signal of frequency domain in Z motion direction
+* tBodyGyro-X: body gyroscope signal of time domain in X motion direction
+* tBodyGyro-Y:  body gyroscope signal of time domain in Y motion direction
+* tBodyGyro-Z:  body gyroscope signal of time domain in Z motion direction
+* tBodyGyroJerk-X: body gyroscpoe jerk signal of time domain in X motion direction
+* tBodyGyroJerk-Y: body gyroscpoe jerk signal of time domain in Y motion direction
+* tBodyGyroJerk-Z: body gyroscpoe jerk signal of time domain in Z motion direction
+* tBodyGyroJerkMag: magnitude of body gyroscope jerk signal of time domain
+* tBodyGyroMag: magnitude of body grroscope signal of time domain
+##### **N/A:** no
+##### **Column Name:** measurement
+##### **Description:** The values of the signals are summarized in many different ways. In the data set we are interested, we are only interested in mean and standard deviation 2 values.
+##### **Data Type:** character
+##### **Values:** mean(average), std(standard deviation)
+##### **N/A:** no
+
+#### **Column Name: mean(reading)**
+##### **Description:** average of the readings from experiment per subject, activity, sensor, signal, measurement
+##### **Data Type:** numeric
+##### **Values:** the average value of the readings from experiement group by subject, activity, sensor, signal, and measurement.
 N/A: no
 
 
