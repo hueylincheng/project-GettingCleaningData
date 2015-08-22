@@ -87,23 +87,23 @@ dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
 
 * Create initial tidy data set by selecting the columns we need, rename  to more descriptive column names, and clean up the data value to reflect column name
 ...
-	_dt_tidyData <- select(dt_tidyData,subject, activity, sensor, variable, measurement, value)
-	colnames(dt_tidyData) <- c("subject", "activity", "sensor", "signal", "measurement", "reading")
-	## clean up the data in each column so each value represents one variable
-	## sensor: accelerometer and gryroscope
-	## signal: tBodyAcc-X, -Y, -XYZ, tGravityAcc-XYZ, tBodyAccJerk-XYZ, tBodyGyro-XYZ
-	## measure: mean, std
+    _dt_tidyData <- select(dt_tidyData,subject, activity, sensor, variable, measurement, value)
+    colnames(dt_tidyData) <- c("subject", "activity", "sensor", "signal", "measurement", "reading")
+    ## clean up the data in each column so each value represents one variable
+    ## sensor: accelerometer and gryroscope
+    ## signal: tBodyAcc-X, -Y, -XYZ, tGravityAcc-XYZ, tBodyAccJerk-XYZ, tBodyGyro-XYZ
+    ## measure: mean, std
 
-	dt_tidyData$sensor[grepl("acc", dt_tidyData$sensor, ignore.case=TRUE)] <- "accelerometer"
-	dt_tidyData$sensor[grepl("gyro", dt_tidyData$sensor, ignore.case=TRUE)] <- "gyroscope"
+    dt_tidyData$sensor[grepl("acc", dt_tidyData$sensor, ignore.case=TRUE)] <- "accelerometer"
+    dt_tidyData$sensor[grepl("gyro", dt_tidyData$sensor, ignore.case=TRUE)] <- "gyroscope"
 
-	## convert signal factor as character so we can 
-	dt_tidyData[4] <- lapply(dt_tidyData[4], as.character)
-	dt_tidyData$signal <- sub("-mean\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
-	dt_tidyData$signal <- sub("-std\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
+    ## convert signal factor as character so we can 
+    dt_tidyData[4] <- lapply(dt_tidyData[4], as.character)
+    dt_tidyData$signal <- sub("-mean\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
+    dt_tidyData$signal <- sub("-std\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
 
-	dt_tidyData$measurement[grepl("mean", dt_tidyData$measurement, ignore.case=TRUE)] <- "mean"
-	dt_tidyData$measurement[grepl("std", dt_tidyData$measurement, ignore.case=TRUE)] <- "std"_
+    dt_tidyData$measurement[grepl("mean", dt_tidyData$measurement, ignore.case=TRUE)] <- "mean"
+    dt_tidyData$measurement[grepl("std", dt_tidyData$measurement, ignore.case=TRUE)] <- "std"_
 ...
 
 * Group the tidy data set by subject, activity, sensor, signal, and measurement
