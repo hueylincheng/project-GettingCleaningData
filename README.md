@@ -23,11 +23,13 @@ R> source(run_analysis.R)
 * Create a github repo to upload the codes and results to github for peer reviews
 * Create a R script under the working directory setup at step 0.2
 * Load required libraries(dplyr, data.table, reshape2, tidyr) used in this script
+
 ...
     _library(dplyr)_
     _library(data.table)_
    
 ...
+
 * Read raw data from the files to store in R data frames. 
 
      _df_x_test <- read.table("./UCI HAR Dataset/test/X_test.txt", header=FALSE)_
