@@ -64,7 +64,7 @@ The result of the data frame looks like the following -
 
 Use setname() to rename descriptive activity column to 'activity'.
 
-    _setnames(dt_extractMeanStd, "actyDescription", "activity")_
+    *setnames(dt_extractMeanStd, "actyDescription", "activity")*
 
 
 ## **Step 4. Appropriately labels the data set with descriptive variable names**
