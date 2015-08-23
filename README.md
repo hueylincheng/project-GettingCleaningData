@@ -24,11 +24,11 @@ R> source(run_analysis.R)
 * Create a R script under the working directory setup at step 0.2
 * Load required libraries(dplyr, data.table, reshape2, tidyr) used in this script
 
-...
+
     _library(dplyr)_
     _library(data.table)_
    
-...
+
 
 * Read raw data from the files to store in R data frames. 
 
@@ -62,9 +62,10 @@ The result of the data frame looks like the following -
 
 ## **Step 3. Uses descriptive activity names to name the activities in the data set**
 
-Use setname() to rename descriptive activity column to 'activity'
+Use setname() to rename descriptive activity column to 'activity'.
 
     _setnames(dt_extractMeanStd, "actyDescription", "activity")_
+
 
 ## **Step 4. Appropriately labels the data set with descriptive variable names**
 
@@ -84,8 +85,8 @@ Finally, we run_analysis.R create a tidy data with the average of the reading pe
 
 * Split the 'variable' volumn to represent 2 other variables (senor type, and measurement)
 
-    _dt_splitVar <- colsplit(dt_narrowData$variable, "-", c("sensor", "measurement"))
-dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
+    _dt_splitVar <- colsplit(dt_narrowData$variable, "-", c("sensor", "measurement"))_
+    _dt_tidyData <- cbind(dt_narrowData, dt_splitVar)_
 
 * Create initial tidy data set by selecting the columns we need, rename to more descriptive column names, and clean up the data value to reflect column name
 
