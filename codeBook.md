@@ -62,11 +62,13 @@ The goal of tidy data -
 * Each observations forms a row
 * Each table/file stores data about one kind of observation
 
+The tidy data set I would like to create can offer the view of data group by the volunteer, the activity they do, the sensor signal being measured in multiple directions.
+
 To transform this data set to tidy data set, a few steps below are followed:
-1. merge the data in the test and train 2 data sets
-2. give each column a descriptive names
-3. remove duplicate columns. Use dim(), str(), unique(), head(), tail(), nrow() to help examing the data
-4. select only mean() and std() variables/features we would like to keep
+1. Merge the data in the test and train 2 data sets
+2. Give each column a descriptive names
+3. Remove duplicate columns. Use dim(), str(), unique(), head(), tail(), nrow() to help examing the data
+4. Select only mean() and std() variables/features we would like to keep
 
 After we get a consolidated data set without duplications, we get a data set with 10299 observations and 68 columns. 66 of them are feature names which represent different measurements from 2 senor signals - accelerometer and gyroscope).
 The problem we can observe is this data consolidated data set has column headers that are values, not variable names.  
@@ -74,9 +76,9 @@ The problem we can observe is this data consolidated data set has column headers
 Take tBodyAcc-mean()-X as example,  it can be splitted to 3 different values: senor signal(Acc or Accelerometer), time domain signal type(tBodyAcc-X), and measurement it is taken(mean of the values).
  
 To create the tidy data set, we follow the procedures list below -
-1. melt the data. id.vars are subject and activity; the variables are all the features/measurements to get a narrow, skinny data set
-2. split the variable column based on "_" to create 2 separate columns: senor (signal) and measurement. And add the 2 columns to the melted data set created on step 1
-3. give each column a meaningful names: subject, activity, senor, signal, measurement, and reading.
+1. Melt the data. id.vars are subject and activity; the variables are all the features/measurements to get a narrow, skinny data set
+2. Split the variable column based on "_" to create 2 separate columns: senor (signal) and measurement. And add the 2 columns to the melted data set created on step 1
+3. Give each column a meaningful names: subject, activity, senor, signal, measurement, and reading.
 
 Now, we can clean the data in each column by only subtract the strings we can use to represent the column name. There are 3 columns to be further processed -
 sensor - If the value contatins "acc" or "Acc" (case incensitive), "accelerometer" is the senor signal. If the value contains "gyro" or "Gyro" (case incensitive), "gyroscope" is the senor signal. Use the following code to transform the data. When try to find the sub string in a given string, use grep() and ignore the case (ignore.case=TRUE) - find sub string regardless the case.
