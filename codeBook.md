@@ -65,6 +65,7 @@ The goal of tidy data -
 The tidy data set I would like to create can offer the view of data group by the volunteer, the activity they do, the sensor signal being measured in multiple directions.
 
 To transform this data set to tidy data set, a few steps below are followed:
+
 1. Merge the data in the test and train 2 data sets
 2. Give each column a descriptive names
 3. Remove duplicate columns. Use dim(), str(), unique(), head(), tail(), nrow() to help examing the data
@@ -75,7 +76,8 @@ The problem we can observe is this data consolidated data set has column headers
 
 Take tBodyAcc-mean()-X as example,  it can be splitted to 3 different values: senor signal(Acc or Accelerometer), time domain signal type(tBodyAcc-X), and measurement it is taken(mean of the values).
  
-To create the tidy data set, we follow the procedures list below -
+To create the tidy data set, we follow the procedures list below:
+
 1. Melt the data. id.vars are subject and activity; the variables are all the features/measurements to get a narrow, skinny data set
 2. Split the variable column based on "_" to create 2 separate columns: senor (signal) and measurement. And add the 2 columns to the melted data set created on step 1
 3. Give each column a meaningful names: subject, activity, senor, signal, measurement, and reading.
@@ -97,7 +99,12 @@ One thing to note is: we can tell by str() that signal is current a factor varia
     dt_tidyData[4] <- lapply(dt_tidyData[4], as.character)
     dt_tidyData$signal <- sub("-mean\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
     dt_tidyData$signal <- sub("-std\\(\\)", "", dt_tidyData$signal, ignore.case=TRUE)
-    measurement - only mean and std are our measurements. Use grep to find the value with mean and replace the whole string with mean. Same for std.
+...
+
+measurement - only mean and std are our measurements. 
+Use grep to find the value with mean and replace the whole string with mean. Same for std.
+
+...
     dt_tidyData$measurement[grepl("mean", dt_tidyData$measurement, ignore.case=TRUE)] <- "mean"
     dt_tidyData$measurement[grepl("std", dt_tidyData$measurement, ignore.case=TRUE)] <- "std"
 ...
