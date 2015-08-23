@@ -32,7 +32,7 @@ R> source(run_analysis.R)
 
 * Read raw data from the files to store in R data frames. 
 
-     _df_x_test <- read.table("./UCI HAR Dataset/test/X_test.txt", header=FALSE)_
+    _df_x_test <- read.table("./UCI HAR Dataset/test/X_test.txt", header=FALSE)_
 
 There are a few data sets we need and the data included is explained as the following:
 * X_test, y_test have all the measurements of the signals
@@ -58,13 +58,13 @@ The result of the data frame looks like the following -
 1. Convert data frame, dt_allData to data table via tbl_df so we can use dplyr package to clean the data
 2. Use select() function to get only the columns containing mean() or std() of the signal/measurements
 
-_dt_extractMeanStd <- select(dt_allData, subject, actyDescription, grep("mean\\(\\)|std\\(\\)", colnames(dt_allData), fixed=FALSE))_
+    _dt_extractMeanStd <- select(dt_allData, subject, actyDescription, grep("mean\\(\\)|std\\(\\)", colnames(dt_allData), fixed=FALSE))_
 
 ## **Step 3. Uses descriptive activity names to name the activities in the data set**
 
 Use setname() to rename descriptive activity column to 'activity'
 
-_setnames(dt_extractMeanStd, "actyDescription", "activity")_
+    _setnames(dt_extractMeanStd, "actyDescription", "activity")_
 
 ## **Step 4. Appropriately labels the data set with descriptive variable names**
 
